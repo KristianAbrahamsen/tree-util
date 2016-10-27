@@ -11,6 +11,7 @@ var standardConfig =  { id : 'id', parentid : 'parentid'};
 var singleTreeOneNodeObjArray = [{ id : 1 }];
 var singleTreeTwoNodeObjArray = [{ id : 1 }, { id : 2, parentid : 1 }];
 var singleTreeRoootTreeChildren = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }];
+
 var complexSingleTreeData = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }];
 complexSingleTreeData.push({ id : 5, parentid : 2 });
 complexSingleTreeData.push({ id : 6, parentid : 2 });
@@ -19,6 +20,9 @@ complexSingleTreeData.push({ id : 8, parentid : 4 });
 complexSingleTreeData.push({ id : 9, parentid : 2 });
 complexSingleTreeData.push({ id : 10, parentid : 6 });
 complexSingleTreeData.push({ id : 11, parentid : 6 });
+
+var moreTreeData = [{ id : 12 }, { id : 13, parentid : 12}];
+var twoTreesData = complexSingleTreeData.concat(moreTreeData);
 
 describe('#builder.buildTrees', function() {
   it('missing param objectArray should throw exception', function() {
@@ -155,5 +159,78 @@ describe('#builder.buildTrees', function() {
     //tests
     nodeWithChildrenCount.should.equal(5);
     nodeCheckCount.should.equal(complexSingleTreeData.length);
+  });
+
+  it('aray with two root which has more complex structure should have child count for each node as expected', function(){
+    const treeToTest = twoTreesData;
+    let trees = builder.buildTrees(treeToTest, standardConfig);
+    //test
+    trees.length.should.equal(2);
+    var nodeWithChildrenCount = 0;
+    var nodeCheckCount = 0;
+
+    var checkChildCount = function(node) {
+      //tests
+      if(node.id === 1) {
+        nodeCheckCount++;
+        node.children.length.should.equal(3);
+      } else if (node.id === 2) {
+        nodeCheckCount++;
+        node.children.length.should.equal(3);
+      } else if (node.id === 3) {
+        nodeCheckCount++;
+        node.children.length.should.equal(1);
+      } else if (node.id === 4) {
+        nodeCheckCount++;
+        node.children.length.should.equal(1);
+      } else if (node.id === 5) {
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      } else if (node.id === 6) {
+        nodeCheckCount++;
+        node.children.length.should.equal(2);
+      } else if (node.id === 7) {
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      } else if (node.id === 8) {
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      } else if (node.id === 9) {
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      } else if (node.id === 10) {
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      } else if (node.id === 11) {
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      } else if (node.id === 12) {
+        console.log('node.id === 12');
+        nodeCheckCount++;
+        node.children.length.should.equal(1);
+      } else if (node.id === 13) {
+        console.log('node.id === 13');
+        nodeCheckCount++;
+        node.children.length.should.equal(0);
+      }
+
+      if(node.children.length > 0) {
+        nodeWithChildrenCount++;
+      }
+
+      for (var i = 0; i < node.children.length; i++) {
+        let childNode = node.children[i];
+        checkChildCount(childNode);
+      }
+    }
+
+    for (var i = 0; i < trees.length; i++) {
+      let rootNode = trees[i];
+      checkChildCount(rootNode);
+    }
+
+    //tests
+    nodeWithChildrenCount.should.equal(6);
+    nodeCheckCount.should.equal(treeToTest.length);
   });
 });

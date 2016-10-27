@@ -14,7 +14,10 @@
   [32m  √[0m[90m aray with one root which has tree child nodee should return one tree where each child as root as parent[0m
   [32m  √[0m[90m aray with one root which has more complex structure should have the property parent set correct for all nodes[0m
   [32m  √[0m[90m aray with one root which has more complex structure should have child count for each node as expected[0m
+node.id === 12
+node.id === 13
+  [32m  √[0m[90m aray with two root which has more complex structure should have child count for each node as expected[0m
 
 
-[92m [0m[32m 13 passing[0m[90m (97ms)[0m
+[92m [0m[32m 14 passing[0m[90m (112ms)[0m
 
