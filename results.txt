@@ -1,0 +1,14 @@
+
+[0m[0m
+[0m  #builder.build[0m
+  [32m  √[0m[90m missing param objectArray should throw exception[0m
+  [32m  √[0m[90m missing param config should throw exception[0m
+  [32m  √[0m[90m config has not id property set, should throw exception[0m
+  [32m  √[0m[90m config has not parentid property set, should throw exception[0m
+  [32m  √[0m[90m empty input aray returns empty array of trees[0m
+  [32m  √[0m[90m aray with one object should return an array containing one tree[0m
+  [32m  √[0m[90m aray with one root and one child node should return an array containing one tree[0m
+
+
+[92m [0m[32m 7 passing[0m[90m (67ms)[0m
+
