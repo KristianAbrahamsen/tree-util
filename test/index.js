@@ -240,6 +240,7 @@ var objectArray = [{ objectid : 1, refid : 1 }, { objectid : 2, refid : 5 }];
 var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
 var addDataConfigObjectArray = { referenceid : 'refid', collectionname : 'objects' };
 
+
 describe('#tree.addData', function() {
   it('addData is called with mising objectArray param and exception is thrown', function() {
     let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
@@ -284,64 +285,89 @@ describe('#tree.addData', function() {
       }
     }
   });
+});
 
-  describe('#tree.getSingleNodeData', function() {
-    it('for the given node returns a collection with 2 items (they come from same collection)', function() {
-      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
-      var tree = trees[0];
-      tree.addData(itemArray, addDataConfig);
-      var node = tree.getNodeById(1);
-      node.getSingleNodeData().length.should.equal(2);
-    });
-
-    it('for given node returns a collection with 3 items (they come from two collections)', function() {
-      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
-      var tree = trees[0];
-      tree.addData(itemArray, addDataConfig);
-      tree.addData(objectArray, addDataConfigObjectArray);
-      var node = tree.getNodeById(1);
-      node.getSingleNodeData().length.should.equal(3);
-    });
+describe('#node.getSingleNodeData', function() {
+  it('for the given node returns a collection with 2 items (they come from same collection)', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    var node = tree.getNodeById(1);
+    node.getSingleNodeData().length.should.equal(2);
   });
 
-  describe('#tree.getRecursiveNodeData', function() {
-    it('for the root node returns a collection with 6 items (they come from 4 different nodes)', function() {
-      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
-      var tree = trees[0];
-      tree.addData(itemArray, addDataConfig);
-      tree.addData(objectArray, addDataConfigObjectArray);
-      var node = tree.getNodeById(1);
-      node.getRecursiveNodeData().length.should.equal(6);
-    });
+  it('for given node returns a collection with 3 items (they come from two collections)', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    tree.addData(objectArray, addDataConfigObjectArray);
+    var node = tree.getNodeById(1);
+    node.getSingleNodeData().length.should.equal(3);
+  });
+});
 
-    it('for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data', function() {
-      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
-      var tree = trees[0];
-      tree.addData(itemArray, addDataConfig);
-      tree.addData(objectArray, addDataConfigObjectArray);
 
-      var checkLeaveNodes = function(node) {
-        if(node.children.length > 0) {
-          for (var i = 0; i < node.children.length; i++) {
-            checkLeaveNodes(node.children[i]);
-          }
-        } else {
-          var dataFromGetSingleNodeData = node.getSingleNodeData();
-          var dataFromGetRecursiveNodeData = node.getRecursiveNodeData();
+describe('#node.getRecursiveNodeData', function() {
+  it('for the root node returns a collection with 6 items (they come from 4 different nodes)', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    tree.addData(objectArray, addDataConfigObjectArray);
+    var node = tree.getNodeById(1);
+    node.getRecursiveNodeData().length.should.equal(6);
+  });
 
-          dataFromGetSingleNodeData.length.should.equal(dataFromGetRecursiveNodeData.length);
+  it('for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    tree.addData(objectArray, addDataConfigObjectArray);
 
-          for (var i = 0; i < dataFromGetSingleNodeData.length; i++) {
-            var singleObj = dataFromGetSingleNodeData[i];
-            var recursiveObj = dataFromGetSingleNodeData[i];
+    var checkLeaveNodes = function(node) {
+      if(node.children.length > 0) {
+        for (var i = 0; i < node.children.length; i++) {
+          checkLeaveNodes(node.children[i]);
+        }
+      } else {
+        var dataFromGetSingleNodeData = node.getSingleNodeData();
+        var dataFromGetRecursiveNodeData = node.getRecursiveNodeData();
 
-            singleObj.should.deep.equal(recursiveObj);
-          }
+        dataFromGetSingleNodeData.length.should.equal(dataFromGetRecursiveNodeData.length);
+
+        for (var i = 0; i < dataFromGetSingleNodeData.length; i++) {
+          var singleObj = dataFromGetSingleNodeData[i];
+          var recursiveObj = dataFromGetSingleNodeData[i];
+
+          singleObj.should.deep.equal(recursiveObj);
         }
       }
+    }
 
-      checkLeaveNodes(trees[0].rootNode);
-    });
+    checkLeaveNodes(trees[0].rootNode);
   });
 
+});
+
+describe('#node.getRecursiveCollection', function() {
+  it('for the root node returns the same data as input for tree.addData)', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    tree.addData(objectArray, addDataConfigObjectArray); //check that this data is not returned
+    var rootNode = tree.rootNode;
+    var recursiveCollection = rootNode.getRecursiveCollection(addDataConfig.collectionname);
+    //test
+    recursiveCollection.length.should.equal(itemArray.length);
+  });
+
+  it('for the root node returns the same data as input for tree.addData (with different data then previous))', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    tree.addData(objectArray, addDataConfigObjectArray); //check that this data is not returned
+    var rootNode = tree.rootNode;
+    var recursiveCollection = rootNode.getRecursiveCollection(addDataConfigObjectArray.collectionname);
+    //test
+    recursiveCollection.length.should.equal(objectArray.length);
+  });
 });
