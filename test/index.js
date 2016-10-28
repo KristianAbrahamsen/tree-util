@@ -235,8 +235,10 @@ describe('#builder.buildTrees', function() {
   });
 });
 
-var itemsArray = [{ itemid : 1, referenceid : 4 }, { itemid : 2, referenceid : 5 }, { itemid : 3, referenceid : 1 },  { itemid : 4, referenceid : 1 }];
+var itemArray = [{ itemid : 1, referenceid : 4 }, { itemid : 2, referenceid : 5 }, { itemid : 3, referenceid : 1 },  { itemid : 4, referenceid : 1 }];
+var objectArray = [{ objectid : 1, refid : 1 }, { objectid : 2, refid : 5 }];
 var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
+var addDataConfigObjectArray = { referenceid : 'refid', collectionname : 'objects' };
 
 describe('#tree.addData', function() {
   it('addData is called with mising objectArray param and exception is thrown', function() {
@@ -248,16 +250,16 @@ describe('#tree.addData', function() {
   it('addData is called with mising config param and exception is thrown', function() {
     let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
-    assert.throws(function() { tree.addData(itemsArray, undefined) }, 'config is mandatory');
+    assert.throws(function() { tree.addData(itemArray, undefined) }, 'config is mandatory');
   });
 
   it('addData is called and data is added to the right nodes', function() {
     let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
-    tree.addData(itemsArray, addDataConfig);
+    tree.addData(itemArray, addDataConfig);
 
-    for (var i = 0; i < itemsArray.length; i++) {
-      let item = itemsArray[i];
+    for (var i = 0; i < itemArray.length; i++) {
+      let item = itemArray[i];
       let node = tree.getNodeById(item.referenceid);
       let collectionLength = 0;
 
@@ -282,4 +284,64 @@ describe('#tree.addData', function() {
       }
     }
   });
+
+  describe('#tree.getSingleNodeData', function() {
+    it('for the given node returns a collection with 2 items (they come from same collection)', function() {
+      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+      var tree = trees[0];
+      tree.addData(itemArray, addDataConfig);
+      var node = tree.getNodeById(1);
+      node.getSingleNodeData().length.should.equal(2);
+    });
+
+    it('for given node returns a collection with 3 items (they come from two collections)', function() {
+      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+      var tree = trees[0];
+      tree.addData(itemArray, addDataConfig);
+      tree.addData(objectArray, addDataConfigObjectArray);
+      var node = tree.getNodeById(1);
+      node.getSingleNodeData().length.should.equal(3);
+    });
+  });
+
+  describe('#tree.getRecursiveNodeData', function() {
+    it('for the root node returns a collection with 6 items (they come from 4 different nodes)', function() {
+      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+      var tree = trees[0];
+      tree.addData(itemArray, addDataConfig);
+      tree.addData(objectArray, addDataConfigObjectArray);
+      var node = tree.getNodeById(1);
+      node.getRecursiveNodeData().length.should.equal(6);
+    });
+
+    it('for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data', function() {
+      let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+      var tree = trees[0];
+      tree.addData(itemArray, addDataConfig);
+      tree.addData(objectArray, addDataConfigObjectArray);
+
+      var checkLeaveNodes = function(node) {
+        if(node.children.length > 0) {
+          for (var i = 0; i < node.children.length; i++) {
+            checkLeaveNodes(node.children[i]);
+          }
+        } else {
+          var dataFromGetSingleNodeData = node.getSingleNodeData();
+          var dataFromGetRecursiveNodeData = node.getRecursiveNodeData();
+
+          dataFromGetSingleNodeData.length.should.equal(dataFromGetRecursiveNodeData.length);
+
+          for (var i = 0; i < dataFromGetSingleNodeData.length; i++) {
+            var singleObj = dataFromGetSingleNodeData[i];
+            var recursiveObj = dataFromGetSingleNodeData[i];
+
+            singleObj.should.deep.equal(recursiveObj);
+          }
+        }
+      }
+
+      checkLeaveNodes(trees[0].rootNode);
+    });
+  });
+
 });

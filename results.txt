@@ -20,7 +20,13 @@
   [32m  √[0m[90m addData is called with mising objectArray param and exception is thrown[0m
   [32m  √[0m[90m addData is called with mising config param and exception is thrown[0m
   [32m  √[0m[90m addData is called and data is added to the right nodes[0m
+[0m    #tree.getSingleNodeData[0m
+    [32m  √[0m[90m for the given node returns a collection with 2 items (they come from same collection)[0m
+    [32m  √[0m[90m for given node returns a collection with 3 items (they come from two collections)[0m
+[0m    #tree.getRecursiveNodeData[0m
+    [32m  √[0m[90m for the root node returns a collection with 6 items (they come from 4 different nodes)[0m
+    [32m  √[0m[90m for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data[0m
 
 
-[92m [0m[32m 17 passing[0m[90m (137ms)[0m
+[92m [0m[32m 21 passing[0m[90m (156ms)[0m
 
