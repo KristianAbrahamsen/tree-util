@@ -54,25 +54,27 @@ describe('#builder.buildTrees', function() {
   });
 
   it('aray with one root and one child node should return one tree where root has one child node', function() {
-    builder.buildTrees(singleTreeTwoNodeObjArray, standardConfig)[0].children.length.should.equal(1);
+    var trees = builder.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
+    var rootNode = trees[0].rootNode;
+    rootNode.children.length.should.equal(1);
   });
 
   it('aray with one root and one child node should return one tree where single child node has root as parent', function(){
     var trees = builder.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
-    var parentNode = trees[0];
+    var parentNode = trees[0].rootNode;
     var childNode = parentNode.children[0];
     childNode.parent.should.deep.equal(parentNode);
   });
 
   it('aray with one root which has tree child nodee should return one tree where root has tree children', function(){
     var trees = builder.buildTrees(singleTreeRoootTreeChildren, standardConfig);
-    var parentNode = trees[0];
+    var parentNode = trees[0].rootNode;
     parentNode.children.length.should.equal(3);
   });
 
   it('aray with one root which has tree child nodee should return one tree where each child as root as parent', function(){
     var trees = builder.buildTrees(singleTreeRoootTreeChildren, standardConfig);
-    var parentNode = trees[0];
+    var parentNode = trees[0].rootNode;
 
     for (var i = 0; i < parentNode.children.length; i++) {
       var childNode = parentNode.children[i];
@@ -94,7 +96,7 @@ describe('#builder.buildTrees', function() {
       }
     }
 
-    let parentNode = trees[0];
+    let parentNode = trees[0].rootNode;
     checkThatParentNodeIsSetCorrect(parentNode);
   });
 
@@ -153,7 +155,7 @@ describe('#builder.buildTrees', function() {
       }
     }
 
-    let parentNode = trees[0];
+    let parentNode = trees[0].rootNode;
     checkChildCount(parentNode);
 
     //tests
@@ -205,11 +207,9 @@ describe('#builder.buildTrees', function() {
         nodeCheckCount++;
         node.children.length.should.equal(0);
       } else if (node.id === 12) {
-        console.log('node.id === 12');
         nodeCheckCount++;
         node.children.length.should.equal(1);
       } else if (node.id === 13) {
-        console.log('node.id === 13');
         nodeCheckCount++;
         node.children.length.should.equal(0);
       }
@@ -225,12 +225,61 @@ describe('#builder.buildTrees', function() {
     }
 
     for (var i = 0; i < trees.length; i++) {
-      let rootNode = trees[i];
+      let rootNode = trees[i].rootNode;
       checkChildCount(rootNode);
     }
 
     //tests
     nodeWithChildrenCount.should.equal(6);
     nodeCheckCount.should.equal(treeToTest.length);
+  });
+});
+
+var itemsArray = [{ itemid : 1, referenceid : 4 }, { itemid : 2, referenceid : 5 }, { itemid : 3, referenceid : 1 },  { itemid : 4, referenceid : 1 }];
+var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
+
+describe('#tree.addData', function() {
+  it('addData is called with mising objectArray param and exception is thrown', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    assert.throws(function() { tree.addData(undefined , addDataConfig) }, 'objectArray is mandatory');
+  });
+
+  it('addData is called with mising config param and exception is thrown', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    assert.throws(function() { tree.addData(itemsArray, undefined) }, 'config is mandatory');
+  });
+
+  it('addData is called and data is added to the right nodes', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    tree.addData(itemsArray, addDataConfig);
+
+    for (var i = 0; i < itemsArray.length; i++) {
+      let item = itemsArray[i];
+      let node = tree.getNodeById(item.referenceid);
+      let collectionLength = 0;
+
+      if(item.referenceid === 4 || item.referenceid === 5) {
+        collectionLength = 1;
+      } else if (item.referenceid === 1) {
+        collectionLength = 2;
+      }
+
+      //tests
+      node[addDataConfig.collectionname].length.should.equal(collectionLength);
+
+      if(item.referenceid === 4 || item.referenceid === 5) {
+        node[addDataConfig.collectionname][0].should.deep.equal(item);
+      } else if (item.referenceid === 1) {
+        if(item.itemid === 3) {
+          node[addDataConfig.collectionname][0].should.deep.equal(item);
+        }
+        if(item.itemid === 4) {
+          node[addDataConfig.collectionname][1].should.deep.equal(item);
+        }
+      }
+    }
   });
 });
