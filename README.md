@@ -12,6 +12,10 @@ Simple but powerfull library for building and working with tree structures.
 Easy to build tree structures where the data items has a parent child relation through id properties.
 An example of a data source with parent child relation can be a table in a relational database.
 
+## Examples
+
+Building the tree.
+
 ```js
 var tree_util = require('tree-util')
 
@@ -26,7 +30,7 @@ var standardConfig =  { id : 'id', parentid : 'parentid'};
 var trees = tree_util.buildTrees(items, standardConfig);
 ```
 
-Easy to determine ancestor or descendant relationships
+Determine ancestor or descendant relationships
 
 ```js
 // Contiued from example above
@@ -37,6 +41,17 @@ var leafNode = tree.getNodeById(5);
 var isDescendant = leafNode.isDescendantOf(rootNode); //returns true
 var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
 ```
+
+## API Reference
+
+The methods in the API either belong to the tree_util, the tree or the node.
+
+### Build trees
+
+  Method - Main Object                                                                 | Description
+---------------------------------------------------------------------------------------|--------------------------
+ buildTrees(objectArray, config))	                                                     | builds a tree based on an object array and a config object which defines the id relation properties.
+
 
 ## License
 (The MIT License)
