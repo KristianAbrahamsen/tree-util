@@ -424,7 +424,8 @@ describe('#node.isDescendantOf', function() {
 
   it('example from readme file', function() {
     // An array where the items has a parent child reference using id properties
-    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 },
+                 { id : 5, parentid : 3 }];
 
     // Config object to set the id properties for the parent child relation
     var standardConfig =  { id : 'id', parentid : 'parentid'};
@@ -458,7 +459,8 @@ describe('#node.isAncestorOf', function() {
 
   it('example from readme file', function() {
     // An array where the items has a parent child reference using id properties
-    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 },
+                 { id : 5, parentid : 3 }];
 
     // Config object to set the id properties for the parent child relation
     var standardConfig =  { id : 'id', parentid : 'parentid'};
