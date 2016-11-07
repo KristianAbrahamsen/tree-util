@@ -49,7 +49,10 @@
 [0m  #node.isAncestorOf[0m
   [32m  √[0m[90m all root descendants should return true when they are used as input param for method isAncestorOf on root node[0m
   [32m  √[0m[90m example from readme file[0m
+[0m    #node.isLeafNode[0m
+    [32m  √[0m[90m should return true when node is a leaf node[0m
+    [32m  √[0m[90m should return true when node is not a leaf node[0m
 
 
-[92m [0m[32m 30 passing[0m[90m (224ms)[0m
+[92m [0m[32m 32 passing[0m[90m (219ms)[0m
 

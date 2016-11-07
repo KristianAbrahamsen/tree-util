@@ -424,8 +424,8 @@ describe('#node.isDescendantOf', function() {
 
   it('example from readme file', function() {
     // An array where the items has a parent child reference using id properties
-    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 },
-                 { id : 5, parentid : 3 }];
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                 { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
 
     // Config object to set the id properties for the parent child relation
     var standardConfig =  { id : 'id', parentid : 'parentid'};
@@ -459,8 +459,8 @@ describe('#node.isAncestorOf', function() {
 
   it('example from readme file', function() {
     // An array where the items has a parent child reference using id properties
-    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 },
-                 { id : 5, parentid : 3 }];
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                 { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
 
     // Config object to set the id properties for the parent child relation
     var standardConfig =  { id : 'id', parentid : 'parentid'};
@@ -475,5 +475,43 @@ describe('#node.isAncestorOf', function() {
     var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
     //Test
     isAncestor.should.equal(true);
+  });
+
+  describe('#node.isLeafNode', function() {
+    it('should return true when node is a leaf node', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var leafNode = tree.getNodeById(5);
+
+      var isLeafNode = leafNode.isLeaf(); //returns true
+      //Test
+      isLeafNode.should.equal(true);
+    });
+
+    it('should return true when node is not a leaf node', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var notLeafNode = tree.getNodeById(3);
+
+      var isLeafNode = notLeafNode.isLeaf(); //returns false
+      //Test
+      isLeafNode.should.equal(false);
+    });
   });
 });
