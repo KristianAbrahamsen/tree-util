@@ -34,5 +34,5 @@
   [32m  √[0m[90m for the root node returns the same data as input for tree.addData (with different data then previous))[0m
 
 
-[92m [0m[32m 23 passing[0m[90m (172ms)[0m
+[92m [0m[32m 23 passing[0m[90m (166ms)[0m
 
