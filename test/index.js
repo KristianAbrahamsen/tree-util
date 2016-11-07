@@ -399,3 +399,33 @@ describe('#node.getAncestors', function() {
     }
   });
 });
+
+describe('#node.isDescendantOf', function() {
+  it('all root descendants should return true when they call isDescendantOf with root node as param', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    var rootNode = tree.rootNode;
+    var rootDescendants = rootNode.getDescendants();
+
+    for (var i = 0; i < rootDescendants.length; i++) {
+      var rootDescendant = rootDescendants[i];
+      //test
+      rootDescendant.isDescendantOf(rootNode).should.equal(true);
+    }
+  });
+});
+
+describe('#node.isAncestorOf', function() {
+  it('all root descendants should return true when they are used as input param for method isAncestorOf on root node', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    var rootNode = tree.rootNode;
+    var rootDescendants = rootNode.getDescendants();
+
+    for (var i = 0; i < rootDescendants.length; i++) {
+      var rootDescendant = rootDescendants[i];
+      //test
+      rootNode.isAncestorOf(rootDescendant).should.equal(true);
+    }
+  });
+});
