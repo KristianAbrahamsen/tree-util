@@ -371,3 +371,31 @@ describe('#node.getRecursiveCollection', function() {
     recursiveCollection.length.should.equal(objectArray.length);
   });
 });
+
+describe('#node.getDescendants', function() {
+  it('for the root node returns an array where length is equal to items count - 1 (the root)', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    var rootNode = tree.rootNode;
+    var rootDescendants = rootNode.getDescendants();
+    //test
+    rootDescendants.length.should.equal(complexSingleTreeData.length - 1);
+  });
+});
+
+describe('#node.getAncestors', function() {
+  it('for all descendant nodes of the root node will have the root among its ancestors', function() {
+    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    var tree = trees[0];
+    var rootNode = tree.rootNode;
+    var rootDescendants = rootNode.getDescendants();
+
+    for (var i = 0; i < rootDescendants.length; i++) {
+      var rootDescendant = rootDescendants[i];
+      var ancestors = rootDescendant.getAncestors();
+      var foundRootInAncestors = (ancestors.indexOf(rootNode) >= 0);
+      //test
+      foundRootInAncestors.should.equal(true);
+    }
+  });
+});
