@@ -3,7 +3,6 @@
 var should = require('chai').should();
 var assert = require('chai').assert;
 var tree_util = require('../index.js');
-var builder = tree_util.builder;
 
 var emptyObjectArray = [];
 var emptyConfig = {};
@@ -24,56 +23,56 @@ complexSingleTreeData.push({ id : 11, parentid : 6 });
 var moreTreeData = [{ id : 12 }, { id : 13, parentid : 12}];
 var twoTreesData = complexSingleTreeData.concat(moreTreeData);
 
-describe('#builder.buildTrees', function() {
+describe('#tree_util.buildTrees', function() {
   it('missing param objectArray should throw exception', function() {
-    assert.throws(function() { builder.buildTrees() }, 'objectArray is mandatory');
+    assert.throws(function() { tree_util.buildTrees() }, 'objectArray is mandatory');
   });
 
   it('missing param config should throw exception', function() {
-    assert.throws(function() { builder.buildTrees(emptyObjectArray) }, 'config is mandatory');
+    assert.throws(function() { tree_util.buildTrees(emptyObjectArray) }, 'config is mandatory');
   });
 
   it('config has not id property set, should throw exception', function() {
-    assert.throws(function() { builder.buildTrees(emptyObjectArray, emptyConfig) }, 'config property id is not set');
+    assert.throws(function() { tree_util.buildTrees(emptyObjectArray, emptyConfig) }, 'config property id is not set');
   });
 
   it('config has not parentid property set, should throw exception', function() {
-    assert.throws(function() { builder.buildTrees(emptyObjectArray, { id : 'id' }) }, 'config property parentid is not set');
+    assert.throws(function() { tree_util.buildTrees(emptyObjectArray, { id : 'id' }) }, 'config property parentid is not set');
   });
 
   it('empty input aray returns empty array of trees', function() {
-    builder.buildTrees(emptyObjectArray, standardConfig).should.deep.equal([]);
+    tree_util.buildTrees(emptyObjectArray, standardConfig).should.deep.equal([]);
   });
 
   it('aray with one object should return an array containing one tree', function() {
-    builder.buildTrees(singleTreeOneNodeObjArray, standardConfig).length.should.equal(1);
+    tree_util.buildTrees(singleTreeOneNodeObjArray, standardConfig).length.should.equal(1);
   });
 
   it('aray with one root and one child node should return an array containing one tree', function() {
-    builder.buildTrees(singleTreeTwoNodeObjArray, standardConfig).length.should.equal(1);
+    tree_util.buildTrees(singleTreeTwoNodeObjArray, standardConfig).length.should.equal(1);
   });
 
   it('aray with one root and one child node should return one tree where root has one child node', function() {
-    var trees = builder.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
+    var trees = tree_util.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
     var rootNode = trees[0].rootNode;
     rootNode.children.length.should.equal(1);
   });
 
   it('aray with one root and one child node should return one tree where single child node has root as parent', function(){
-    var trees = builder.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
+    var trees = tree_util.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
     var parentNode = trees[0].rootNode;
     var childNode = parentNode.children[0];
     childNode.parent.should.deep.equal(parentNode);
   });
 
   it('aray with one root which has tree child nodee should return one tree where root has tree children', function(){
-    var trees = builder.buildTrees(singleTreeRoootTreeChildren, standardConfig);
+    var trees = tree_util.buildTrees(singleTreeRoootTreeChildren, standardConfig);
     var parentNode = trees[0].rootNode;
     parentNode.children.length.should.equal(3);
   });
 
   it('aray with one root which has tree child nodee should return one tree where each child as root as parent', function(){
-    var trees = builder.buildTrees(singleTreeRoootTreeChildren, standardConfig);
+    var trees = tree_util.buildTrees(singleTreeRoootTreeChildren, standardConfig);
     var parentNode = trees[0].rootNode;
 
     for (var i = 0; i < parentNode.children.length; i++) {
@@ -83,7 +82,7 @@ describe('#builder.buildTrees', function() {
   });
 
   it('aray with one root which has more complex structure should have the property parent set correct for all nodes', function(){
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     //test
     trees.length.should.equal(1);
 
@@ -102,7 +101,7 @@ describe('#builder.buildTrees', function() {
 
 
   it('aray with one root which has more complex structure should have child count for each node as expected', function(){
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     //test
     trees.length.should.equal(1);
     var nodeWithChildrenCount = 0;
@@ -165,7 +164,7 @@ describe('#builder.buildTrees', function() {
 
   it('aray with two root which has more complex structure should have child count for each node as expected', function(){
     const treeToTest = twoTreesData;
-    let trees = builder.buildTrees(treeToTest, standardConfig);
+    let trees = tree_util.buildTrees(treeToTest, standardConfig);
     //test
     trees.length.should.equal(2);
     var nodeWithChildrenCount = 0;
@@ -243,19 +242,19 @@ var addDataConfigObjectArray = { referenceid : 'refid', collectionname : 'object
 
 describe('#tree.addData', function() {
   it('addData is called with mising objectArray param and exception is thrown', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     assert.throws(function() { tree.addData(undefined , addDataConfig) }, 'objectArray is mandatory');
   });
 
   it('addData is called with mising config param and exception is thrown', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     assert.throws(function() { tree.addData(itemArray, undefined) }, 'config is mandatory');
   });
 
   it('addData is called and data is added to the right nodes', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
 
@@ -289,7 +288,7 @@ describe('#tree.addData', function() {
 
 describe('#node.getSingleNodeData', function() {
   it('for the given node returns a collection with 2 items (they come from same collection)', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     var node = tree.getNodeById(1);
@@ -297,7 +296,7 @@ describe('#node.getSingleNodeData', function() {
   });
 
   it('for given node returns a collection with 3 items (they come from two collections)', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     tree.addData(objectArray, addDataConfigObjectArray);
@@ -309,7 +308,7 @@ describe('#node.getSingleNodeData', function() {
 
 describe('#node.getRecursiveNodeData', function() {
   it('for the root node returns a collection with 6 items (they come from 4 different nodes)', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     tree.addData(objectArray, addDataConfigObjectArray);
@@ -318,7 +317,7 @@ describe('#node.getRecursiveNodeData', function() {
   });
 
   it('for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     tree.addData(objectArray, addDataConfigObjectArray);
@@ -350,7 +349,7 @@ describe('#node.getRecursiveNodeData', function() {
 
 describe('#node.getRecursiveCollection', function() {
   it('for the root node returns the same data as input for tree.addData)', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     tree.addData(objectArray, addDataConfigObjectArray); //check that this data is not returned
@@ -361,7 +360,7 @@ describe('#node.getRecursiveCollection', function() {
   });
 
   it('for the root node returns the same data as input for tree.addData (with different data then previous))', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     tree.addData(objectArray, addDataConfigObjectArray); //check that this data is not returned
@@ -374,7 +373,7 @@ describe('#node.getRecursiveCollection', function() {
 
 describe('#node.getDescendants', function() {
   it('for the root node returns an array where length is equal to items count - 1 (the root)', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     var rootNode = tree.rootNode;
     var rootDescendants = rootNode.getDescendants();
@@ -385,7 +384,7 @@ describe('#node.getDescendants', function() {
 
 describe('#node.getAncestors', function() {
   it('for all descendant nodes of the root node will have the root among its ancestors', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     var rootNode = tree.rootNode;
     var rootDescendants = rootNode.getDescendants();
@@ -402,7 +401,7 @@ describe('#node.getAncestors', function() {
 
 describe('#node.isDescendantOf', function() {
   it('all root descendants should return true when they call isDescendantOf with root node as param', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     var rootNode = tree.rootNode;
     var rootDescendants = rootNode.getDescendants();
@@ -417,7 +416,7 @@ describe('#node.isDescendantOf', function() {
 
 describe('#node.isAncestorOf', function() {
   it('all root descendants should return true when they are used as input param for method isAncestorOf on root node', function() {
-    let trees = builder.buildTrees(complexSingleTreeData, standardConfig);
+    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
     var tree = trees[0];
     var rootNode = tree.rootNode;
     var rootDescendants = rootNode.getDescendants();

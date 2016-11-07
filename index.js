@@ -1,5 +1,6 @@
 var exports = {};
 
-exports.builder = require("./lib/builder.js");
+var builder = require("./lib/builder.js");
+exports.buildTrees = builder.buildTrees;
 
 module.exports = exports;

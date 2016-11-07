@@ -1,6 +1,6 @@
 
 [0m[0m
-[0m  #builder.buildTrees[0m
+[0m  #tree_util.buildTrees[0m
   [32m  √[0m[90m missing param objectArray should throw exception[0m
   [32m  √[0m[90m missing param config should throw exception[0m
   [32m  √[0m[90m config has not id property set, should throw exception[0m
@@ -46,5 +46,5 @@
   [32m  √[0m[90m all root descendants should return true when they are used as input param for method isAncestorOf on root node[0m
 
 
-[92m [0m[32m 27 passing[0m[90m (213ms)[0m
+[92m [0m[32m 27 passing[0m[90m (215ms)[0m
 
