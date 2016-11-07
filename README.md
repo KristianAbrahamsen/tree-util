@@ -8,13 +8,25 @@ An exaple of a data source with parent child relation can be a table in a relati
 var tree_util = require('tree-util')
 
 // An array where the items has a parent child reference using id properties
-var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }];
+var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
 
 // Config object to set the id properties for the parent child relation
 var standardConfig =  { id : 'id', parentid : 'parentid'};
 
 // Creates an array of trees. For this example there will by only one tree
 var trees = tree_util.buildTrees(items, standardConfig);
+```
+
+Easy for checking ancestor or descendant relationships
+
+```js
+// Contiued from example above
+var tree = trees[0];
+var rootNode = tree.rootNode;
+var leafNode = tree.getNodeById(5);
+
+var isDescendant = leafNode.isDescendantOf(rootNode); //returns true
+var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
 ```
 
 ## License

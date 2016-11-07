@@ -234,11 +234,20 @@ describe('#tree_util.buildTrees', function() {
   });
 });
 
+describe('#tree.getNodeById', function() {
+  it('will return an item with the expected id', function() {
+    let trees = tree_util.buildTrees(singleTreeRoootTreeChildren, standardConfig);
+    var tree = trees[0];
+    var id = 3;
+    var node = tree.getNodeById(id);
+    node[standardConfig.id].should.equal(id);
+  });
+});
+
 var itemArray = [{ itemid : 1, referenceid : 4 }, { itemid : 2, referenceid : 5 }, { itemid : 3, referenceid : 1 },  { itemid : 4, referenceid : 1 }];
 var objectArray = [{ objectid : 1, refid : 1 }, { objectid : 2, refid : 5 }];
 var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
 var addDataConfigObjectArray = { referenceid : 'refid', collectionname : 'objects' };
-
 
 describe('#tree.addData', function() {
   it('addData is called with mising objectArray param and exception is thrown', function() {
@@ -412,6 +421,25 @@ describe('#node.isDescendantOf', function() {
       rootDescendant.isDescendantOf(rootNode).should.equal(true);
     }
   });
+
+  it('example from readme file', function() {
+    // An array where the items has a parent child reference using id properties
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+
+    // Config object to set the id properties for the parent child relation
+    var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+    // Creates an array of trees. For this example there will by only one tree
+    var trees = tree_util.buildTrees(items, standardConfig);
+
+    var tree = trees[0];
+    var rootNode = tree.rootNode;
+    var leafNode = tree.getNodeById(5);
+
+    var isDescendant = leafNode.isDescendantOf(rootNode); //returns true
+    //Test
+    isDescendant.should.equal(true);
+  });
 });
 
 describe('#node.isAncestorOf', function() {
@@ -426,5 +454,24 @@ describe('#node.isAncestorOf', function() {
       //test
       rootNode.isAncestorOf(rootDescendant).should.equal(true);
     }
+  });
+
+  it('example from readme file', function() {
+    // An array where the items has a parent child reference using id properties
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+
+    // Config object to set the id properties for the parent child relation
+    var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+    // Creates an array of trees. For this example there will by only one tree
+    var trees = tree_util.buildTrees(items, standardConfig);
+
+    var tree = trees[0];
+    var rootNode = tree.rootNode;
+    var leafNode = tree.getNodeById(5);
+
+    var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
+    //Test
+    isAncestor.should.equal(true);
   });
 });

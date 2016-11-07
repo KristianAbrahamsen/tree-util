@@ -16,6 +16,9 @@
   [32m  √[0m[90m aray with one root which has more complex structure should have child count for each node as expected[0m
   [32m  √[0m[90m aray with two root which has more complex structure should have child count for each node as expected[0m
 
+[0m  #tree.getNodeById[0m
+  [32m  √[0m[90m will return an item with the expected id[0m
+
 [0m  #tree.addData[0m
   [32m  √[0m[90m addData is called with mising objectArray param and exception is thrown[0m
   [32m  √[0m[90m addData is called with mising config param and exception is thrown[0m
@@ -41,10 +44,12 @@
 
 [0m  #node.isDescendantOf[0m
   [32m  √[0m[90m all root descendants should return true when they call isDescendantOf with root node as param[0m
+  [32m  √[0m[90m example from readme file[0m
 
 [0m  #node.isAncestorOf[0m
   [32m  √[0m[90m all root descendants should return true when they are used as input param for method isAncestorOf on root node[0m
+  [32m  √[0m[90m example from readme file[0m
 
 
-[92m [0m[32m 27 passing[0m[90m (215ms)[0m
+[92m [0m[32m 30 passing[0m[90m (219ms)[0m
 
