@@ -14,7 +14,7 @@ var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 }, { i
 var standardConfig =  { id : 'id', parentid : 'parentid'};
 
 // Creates an array of trees. For this example there will by only one tree
-var trees = tree_util.buildTrees(singleTreeRoootTreeChildren, standardConfig);
+var trees = tree_util.buildTrees(items, standardConfig);
 ```
 
 ## License
