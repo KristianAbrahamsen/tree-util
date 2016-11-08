@@ -46,11 +46,18 @@ var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
 
 The methods in the API either belong to the tree_util, the tree or the node.
 
-### Build trees
+### tree_util
 
-  Method - Main Object                                                                 | Description
----------------------------------------------------------------------------------------|--------------------------
- buildTrees(objectArray, config))	                                                     | builds a tree based on an object array and a config object which defines the id relation properties.
+#### Methods
+##### buildTrees
+Builds a tree based on an object array and a config object which defines the id relation properties.
+###### Usage
+buildTrees(objectArray, config);
+###### Arguments
+Param         | Type       | Details                                  
+--------------|------------|--------------------------------------------------------------------------------------
+objectArray   |  Array     | An array of objects with ids which determines the parent child relation                                 
+config        |  object    | An object which defines the properties which defines the parent child relation for the data objects in the objectArray param        
 
 
 ## License
