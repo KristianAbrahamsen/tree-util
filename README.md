@@ -54,10 +54,49 @@ Builds a tree based on an object array and a config object which defines the id 
 ###### Usage
 buildTrees(objectArray, config);
 ###### Arguments
-Param         | Type       | Details                                  
---------------|------------|--------------------------------------------------------------------------------------
-objectArray   |  Array     | An array of objects with ids which determines the parent child relation                                 
-config        |  object    | An object which defines the properties which defines the parent child relation for the data objects in the objectArray param. The object has following properties: <br>&nbsp;&nbsp;&nbsp;&nbsp;**id** - Name of the id property <br>&nbsp;&nbsp;&nbsp;&nbsp;**parentid** - Name of the property which reference parent object
+<table>
+  <thead>
+    <tr>
+      <td>
+        Param
+      </td>
+      <td>
+        Type
+      </td>
+      <td>
+        Details
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        objectArray
+      </td>
+      <td>
+        Array
+      </td>
+      <td>
+         An array of objects with ids which determines the parent child relation
+      </td>
+    </tr>
+    <tr>
+      <td>
+        config
+      </td>
+      <td>
+        object
+      </td>
+      <td>
+          An object which defines the properties which defines the parent child relation for the data objects in the objectArray param. The object has following properties:
+          <ul>
+            <li><b>id</b> - Name of the id property (primary key)</li>
+            <li><b>parentid</b> - Name of the property which reference the parent object (foreign key)</li>
+          </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
 
