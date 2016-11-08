@@ -57,7 +57,11 @@ buildTrees(objectArray, config);
 Param         | Type       | Details                                  
 --------------|------------|--------------------------------------------------------------------------------------
 objectArray   |  Array     | An array of objects with ids which determines the parent child relation                                 
-config        |  object    | An object which defines the properties which defines the parent child relation for the data objects in the objectArray param        
+config        |  object    | An object which defines the properties which defines the parent child relation for the data objects in the objectArray param. The object has following properties: <br>&nbsp;&nbsp;&nbsp;&nbsp;**id** - Name of the id property <br>&nbsp;&nbsp;&nbsp;&nbsp;**parentid** - Name of the property which reference parent object
+
+
+
+
 
 
 ## License
