@@ -209,7 +209,84 @@ getNodeById(id);
         Anything
       </td>
       <td>
-         Id value for node. Typically an integer(Number)
+         Id value for node. Can be anything but is typically an integer(Number)
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### node
+
+#### Properties
+
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Name</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        id
+      </td>
+      <td>
+        Anything
+      </td>
+      <td>
+        Id for the node. Can be anything but is typically an integer(Number)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        parentid
+      </td>
+      <td>
+        Anything
+      </td>
+      <td>
+        Parent id for the node. Can be anything but is typically an integer(Number)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        children
+      </td>
+      <td>
+        Array
+      </td>
+      <td>
+        An array of child nodes
+      </td>
+    </tr>
+    <tr>
+      <td>
+        dataObj
+      </td>
+      <td>
+        object
+      </td>
+      <td>
+        the data object used to create the node when the tree was build
+      </td>
+    </tr>
+    <tr>
+      <td>
+        collectionnames
+      </td>
+      <td>
+        Array
+      </td>
+      <td>
+        An array of collection name for data added to the node. These data are arrays accessible through properties with names from this collection.
       </td>
     </tr>
   </tbody>
