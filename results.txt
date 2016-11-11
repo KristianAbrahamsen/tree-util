@@ -54,5 +54,5 @@
     [32m  √[0m[90m should return true when node is not a leaf node[0m
 
 
-[92m [0m[32m 32 passing[0m[90m (89ms)[0m
+[92m [0m[32m 32 passing[0m[90m (269ms)[0m
 

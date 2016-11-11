@@ -58,13 +58,13 @@ buildTrees(objectArray, config);
   <thead>
     <tr>
       <td>
-        Param
+        <b>Param</b>
       </td>
       <td>
-        Type
+        <b>Type</b>
       </td>
       <td>
-        Details
+        <b>Details</b>
       </td>
     </tr>
   </thead>
@@ -98,10 +98,122 @@ buildTrees(objectArray, config);
   </tbody>
 </table>
 
+### tree
 
+#### Properties
 
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Name</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        rootNode
+      </td>
+      <td>
+        Node object
+      </td>
+      <td>
+        Root node for the tree
+      </td>
+    </tr>
+  </tbody>
+</table>
+#### Methods
 
+##### addData
+Adds data to the nodes based on config object which defines the reference id.
+###### Usage
+addData(objectArray, config);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        objectArray
+      </td>
+      <td>
+        Array
+      </td>
+      <td>
+         An array of objects with ids which determines the node relation
+      </td>
+    </tr>
+    <tr>
+      <td>
+        config
+      </td>
+      <td>
+        object
+      </td>
+      <td>
+          An object which defines the reference property and the collection name. The object has following properties:
+          <ul>
+            <li><b>referenceid</b> - Name of the referenceid property for the data object (reference primary id of node)</li>
+            <li><b>collectionname</b> - Name of the property which will hold the array of data object on the node</li>
+          </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
+##### getNodeById
+Gets the node in the tree based on id parameter.
+###### Usage
+getNodeById(id);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        id
+      </td>
+      <td>
+        Anything
+      </td>
+      <td>
+         Id value for node. Typically an integer(Number)
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## License
 (The MIT License)
