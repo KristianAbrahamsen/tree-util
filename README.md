@@ -49,7 +49,7 @@ The methods in the API either belong to the tree_util, the tree or the node.
 ### tree_util
 
 #### Methods
-##### buildTrees
+##### <b>buildTrees</b>
 Builds a tree based on an object array and a config object which defines the id relation properties.
 ###### Usage
 buildTrees(objectArray, config);
@@ -132,7 +132,7 @@ buildTrees(objectArray, config);
 </table>
 #### Methods
 
-##### addData
+##### <b>addData</b>
 Adds data to the nodes based on config object which defines the reference id.
 ###### Usage
 addData(objectArray, config);
@@ -181,7 +181,7 @@ addData(objectArray, config);
   </tbody>
 </table>
 
-##### getNodeById
+##### <b>getNodeById</b>
 Gets the node in the tree based on id parameter.
 ###### Usage
 getNodeById(id);
@@ -294,7 +294,7 @@ getNodeById(id);
 
 ### Methods
 
-##### addChild
+##### <b>addChild</b>
 Adds a child node to the node
 ###### Usage
 addChild(child);
@@ -328,7 +328,7 @@ addChild(child);
   </tbody>
 </table>
 
-##### addParent
+##### <b>addParent</b>
 Sets the parent node for the node
 ###### Usage
 addParent(parentNode);
@@ -362,17 +362,17 @@ addParent(parentNode);
   </tbody>
 </table>
 
-##### getAncestors
+##### <b>getAncestors</b>
 Gets all the ancestor nodes
 ###### Usage
 getAncestors();
 
-##### getDescendants
+##### <b>getDescendants</b>
 Gets all the descendant nodes
 ###### Usage
 getDescendants();
 
-##### getRecursiveCollection
+##### <b>getRecursiveCollection</b>
 Gets the data added to the collections specified by name for the node and its descendants (added through method addData on the tree)
 ###### Usage
 getRecursiveCollection(collectionname);
@@ -406,17 +406,17 @@ getRecursiveCollection(collectionname);
   </tbody>
 </table>
 
-##### getRecursiveNodeData
+##### <b>getRecursiveNodeData</b>
 Gets the data added to the node and its descendants (added through method addData on the tree)
 ###### Usage
 getRecursiveNodeData();
 
-##### getSingleNodeData
+##### <b>getSingleNodeData</b>
 Gets the data added to the node (added through method addData on the tree)
 ###### Usage
 getSingleNodeData();
 
-##### isAncestorOf
+##### <b>isAncestorOf</b>
 Returns true if the current node is ancestor of the input parameter node
 ###### Usage
 isAncestorOf(node);
@@ -450,7 +450,7 @@ isAncestorOf(node);
   </tbody>
 </table>
 
-##### isDescendantOf
+##### <b>isDescendantOf</b>
 Returns true if the current node is descendant of the input parameter node
 ###### Usage
 isDescendantOf(node);
@@ -484,8 +484,8 @@ isDescendantOf(node);
   </tbody>
 </table>
 
-##### isLeaf
-Returns true if the current node a leaf node
+##### <b>isLeaf</b>
+Returns true if the current node is a leaf node
 ###### Usage
 isLeaf();
 
