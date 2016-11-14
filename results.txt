@@ -23,6 +23,7 @@
   [32m  √[0m[90m addData is called with mising objectArray param and exception is thrown[0m
   [32m  √[0m[90m addData is called with mising config param and exception is thrown[0m
   [32m  √[0m[90m addData is called and data is added to the right nodes[0m
+  [32m  √[0m[90m addData is called with the same data as in the example in the readme file[0m
 
 [0m  #node.getSingleNodeData[0m
   [32m  √[0m[90m for the given node returns a collection with 2 items (they come from same collection)[0m
@@ -54,5 +55,5 @@
     [32m  √[0m[90m should return true when node is not a leaf node[0m
 
 
-[92m [0m[32m 32 passing[0m[90m (235ms)[0m
+[92m [0m[32m 33 passing[0m[90m (228ms)[0m
 

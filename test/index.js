@@ -293,6 +293,29 @@ describe('#tree.addData', function() {
       }
     }
   });
+
+  it('addData is called with the same data as in the example in the readme file', function() {
+    // An array where the items has a parent child reference using id properties
+    var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                 { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+
+    // Config object to set the id properties for the parent child relation
+    var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+    // Creates an array of trees. For this example there will by only one tree
+    var trees = tree_util.buildTrees(items, standardConfig);
+
+    var tree = trees[0];
+    var itemDataArray = [{ itemid : 1, value : 2, referenceid : 4 }, { itemid : 2, value : 5, referenceid : 5 }, { itemid : 3, value : 3, referenceid : 1 },  { itemid : 4, value : 1, referenceid : 1 }];
+    var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
+
+    tree.addData(itemDataArray, addDataConfig);
+
+    var nodeWithCollection = tree.getNodeById(1);
+    var nodeItems = nodeWithCollection.items; // returns an array with two objects
+
+    nodeItems.length.should.equal(2);
+  });
 });
 
 describe('#node.getSingleNodeData', function() {
