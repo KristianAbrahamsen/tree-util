@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KristianAbrahamsen/tree-util.git"
+    "url": "git://github.com/KristianAbrahamsen/tree-util.git"
   },
   "keywords": [
     "tree",
