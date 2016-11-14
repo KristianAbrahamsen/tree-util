@@ -47,7 +47,10 @@ Add data to the nodes based on reference id property
 ```js
 // Contiued from example above
 
-var itemDataArray = [{ itemid : 1, value : 2, referenceid : 4 }, { itemid : 2, value : 5, referenceid : 5 }, { itemid : 3, value : 3, referenceid : 1 },  { itemid : 4, value : 1, referenceid : 1 }];
+var itemDataArray = [{ itemid : 1, value : 2, referenceid : 4 },
+                     { itemid : 2, value : 5, referenceid : 5 },
+                     { itemid : 3, value : 3, referenceid : 1 },  
+                     { itemid : 4, value : 1, referenceid : 1 }];
 var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
 
 tree.addData(itemDataArray, addDataConfig);
