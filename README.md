@@ -236,6 +236,39 @@ getNodeById(id);
   <tbody>
     <tr>
       <td>
+        children
+      </td>
+      <td>
+        Array
+      </td>
+      <td>
+        An array of child nodes
+      </td>
+    </tr>
+    <tr>
+      <td>
+        collectionnames
+      </td>
+      <td>
+        Array
+      </td>
+      <td>
+        An array of collection name for data added to the node. These data are arrays accessible through properties with names from this collection.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        dataObj
+      </td>
+      <td>
+        object
+      </td>
+      <td>
+        the data object used to create the node when the tree was build
+      </td>
+    </tr>
+    <tr>
+      <td>
         id
       </td>
       <td>
@@ -256,41 +289,205 @@ getNodeById(id);
         Parent id for the node. Can be anything but is typically an integer(Number)
       </td>
     </tr>
-    <tr>
-      <td>
-        children
-      </td>
-      <td>
-        Array
-      </td>
-      <td>
-        An array of child nodes
-      </td>
-    </tr>
-    <tr>
-      <td>
-        dataObj
-      </td>
-      <td>
-        object
-      </td>
-      <td>
-        the data object used to create the node when the tree was build
-      </td>
-    </tr>
-    <tr>
-      <td>
-        collectionnames
-      </td>
-      <td>
-        Array
-      </td>
-      <td>
-        An array of collection name for data added to the node. These data are arrays accessible through properties with names from this collection.
-      </td>
-    </tr>
   </tbody>
 </table>
+
+### Methods
+
+##### addChild
+Adds a child node to the node
+###### Usage
+addChild(child);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        child
+      </td>
+      <td>
+        node
+      </td>
+      <td>
+         Child node
+      </td>
+    </tr>    
+  </tbody>
+</table>
+
+##### addParent
+Sets the parent node for the node
+###### Usage
+addParent(parentNode);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        parentNode
+      </td>
+      <td>
+        node
+      </td>
+      <td>
+         Parent node
+      </td>
+    </tr>    
+  </tbody>
+</table>
+
+##### getAncestors
+Gets all the ancestor nodes
+###### Usage
+getAncestors();
+
+##### getDescendants
+Gets all the descendant nodes
+###### Usage
+getDescendants();
+
+##### getRecursiveCollection
+Gets the data added to the collections specified by name for the node and its descendants (added through method addData on the tree)
+###### Usage
+getRecursiveCollection(collectionname);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        collectionname
+      </td>
+      <td>
+        String
+      </td>
+      <td>
+         Name of the collection with data on each node
+      </td>
+    </tr>    
+  </tbody>
+</table>
+
+##### getRecursiveNodeData
+Gets the data added to the node and its descendants (added through method addData on the tree)
+###### Usage
+getRecursiveNodeData();
+
+##### getSingleNodeData
+Gets the data added to the node (added through method addData on the tree)
+###### Usage
+getSingleNodeData();
+
+##### isAncestorOf
+Returns true if the current node is ancestor of the input parameter node
+###### Usage
+isAncestorOf(node);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        node
+      </td>
+      <td>
+        node
+      </td>
+      <td>
+         Node to check for ancestor relation
+      </td>
+    </tr>    
+  </tbody>
+</table>
+
+##### isDescendantOf
+Returns true if the current node is descendant of the input parameter node
+###### Usage
+isDescendantOf(node);
+###### Arguments
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        node
+      </td>
+      <td>
+        node
+      </td>
+      <td>
+         Node to check for descendant relation
+      </td>
+    </tr>    
+  </tbody>
+</table>
+
+##### isLeaf
+Returns true if the current node a leaf node
+###### Usage
+isLeaf();
 
 ## License
 (The MIT License)

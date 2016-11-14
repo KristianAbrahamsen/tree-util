@@ -477,7 +477,7 @@ describe('#node.isAncestorOf', function() {
     isAncestor.should.equal(true);
   });
 
-  describe('#node.isLeafNode', function() {
+  describe('#node.isLeaf', function() {
     it('should return true when node is a leaf node', function() {
       // An array where the items has a parent child reference using id properties
       var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
