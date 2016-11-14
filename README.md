@@ -44,7 +44,7 @@ var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
 
 Add data to the nodes based on reference id property
 
-'''js
+```js
 // Contiued from example above
 
 var itemDataArray = [{ itemid : 1, value : 2, referenceid : 4 }, { itemid : 2, value : 5, referenceid : 5 }, { itemid : 3, value : 3, referenceid : 1 },  { itemid : 4, value : 1, referenceid : 1 }];
@@ -54,8 +54,8 @@ tree.addData(itemDataArray, addDataConfig);
 
 var nodeWithCollection = tree.getNodeById(1);
 var nodeItems = nodeWithCollection.items; // returns an array with two objects
+```
 
-'''
 
 And many more methods and properties for working with tree structures. See API reference below for more information.
 
