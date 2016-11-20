@@ -1,6 +1,6 @@
 {
   "name": "tree-util",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utility package for building a tree from array plus functions for wokring with trees",
   "main": "index.js",
   "scripts": {
