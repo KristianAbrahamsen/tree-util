@@ -59,8 +59,13 @@ var nodeWithCollection = tree.getNodeById(1);
 var nodeItems = nodeWithCollection.items; // returns an array with two objects
 ```
 
-
 And many more methods and properties for working with tree structures. See API reference below for more information.
+
+## Installation
+
+```js
+npm install tree-util
+```
 
 ## API Reference
 
@@ -69,11 +74,15 @@ The methods in the API either belong to the tree_util, the tree or the node.
 ### tree_util
 
 #### Methods
+
 ##### <b>buildTrees</b>
 Builds a tree based on an object array and a config object which defines the id relation properties.
+
 ###### Usage
 buildTrees(objectArray, config);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -154,9 +163,12 @@ buildTrees(objectArray, config);
 
 ##### <b>addData</b>
 Adds data to the nodes based on config object which defines the reference id.
+
 ###### Usage
 addData(objectArray, config);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -203,9 +215,12 @@ addData(objectArray, config);
 
 ##### <b>getNodeById</b>
 Gets the node in the tree based on id parameter.
+
 ###### Usage
 getNodeById(id);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -316,9 +331,12 @@ getNodeById(id);
 
 ##### <b>addChild</b>
 Adds a child node to the node
+
 ###### Usage
 addChild(child);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -384,19 +402,24 @@ addParent(parentNode);
 
 ##### <b>getAncestors</b>
 Gets all the ancestor nodes
+
 ###### Usage
 getAncestors();
 
 ##### <b>getDescendants</b>
 Gets all the descendant nodes
+
 ###### Usage
 getDescendants();
 
 ##### <b>getRecursiveCollection</b>
 Gets the data added to the collections specified by name for the node and its descendants (added through method addData on the tree)
+
 ###### Usage
 getRecursiveCollection(collectionname);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -428,19 +451,24 @@ getRecursiveCollection(collectionname);
 
 ##### <b>getRecursiveNodeData</b>
 Gets the data added to the node and its descendants (added through method addData on the tree)
+
 ###### Usage
 getRecursiveNodeData();
 
 ##### <b>getSingleNodeData</b>
 Gets the data added to the node (added through method addData on the tree)
+
 ###### Usage
 getSingleNodeData();
 
 ##### <b>isAncestorOf</b>
 Returns true if the current node is ancestor of the input parameter node
+
 ###### Usage
 isAncestorOf(node);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -472,9 +500,12 @@ isAncestorOf(node);
 
 ##### <b>isDescendantOf</b>
 Returns true if the current node is descendant of the input parameter node
+
 ###### Usage
 isDescendantOf(node);
+
 ###### Arguments
+
 <table>
   <thead>
     <tr>
@@ -506,6 +537,7 @@ isDescendantOf(node);
 
 ##### <b>isLeaf</b>
 Returns true if the current node is a leaf node
+
 ###### Usage
 isLeaf();
 
