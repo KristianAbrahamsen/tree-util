@@ -53,7 +53,14 @@
 [0m    #node.isLeaf[0m
     [32m  √[0m[90m should return true when node is a leaf node[0m
     [32m  √[0m[90m should return true when node is not a leaf node[0m
+[0m    #node.removeAllDescendants[0m
+    [32m  √[0m[90m should return 0 for length for children property after function call on node with child nodes[0m
+    [32m  √[0m[90m should return 0 for length for children property after function call on node with no child nodes[0m
+    [32m  √[0m[90m all child nodes should have parent set to null after function call[0m
+[0m    #node.removeParent[0m
+    [32m  √[0m[90m should return null for parent property[0m
+    [32m  √[0m[90m parent should not contain node in children array[0m
 
 
-[92m [0m[32m 33 passing[0m[90m (227ms)[0m
+[92m [0m[32m 38 passing[0m[90m (160ms)[0m
 

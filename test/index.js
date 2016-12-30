@@ -2,6 +2,7 @@
 
 var should = require('chai').should();
 var assert = require('chai').assert;
+var expect = require('chai').expect;
 var tree_util = require('../index.js');
 
 var emptyObjectArray = [];
@@ -538,6 +539,111 @@ describe('#node.isAncestorOf', function() {
       var isLeafNode = notLeafNode.isLeaf(); //returns false
       //Test
       isLeafNode.should.equal(false);
+    });
+  });
+
+  describe('#node.removeAllDescendants', function() {
+    it('should return 0 for length for children property after function call on node with child nodes', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeWithChildren = tree.getNodeById(3);
+
+      nodeWithChildren.removeAllDescendants();
+      //Test
+      nodeWithChildren.children.length.should.equal(0);
+    });
+
+    it('should return 0 for length for children property after function call on node with no child nodes', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var leafNode = tree.getNodeById(5);
+
+      leafNode.removeAllDescendants();
+      //Test
+      leafNode.children.length.should.equal(0);
+    });
+
+    it('all child nodes should have parent set to null after function call', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeWithChildren = tree.getNodeById(3);
+      var childNodes = nodeWithChildren.children.concat([]);
+
+      //Act
+      nodeWithChildren.removeAllDescendants();
+
+      //Test
+      for (var i = 0; i < childNodes.length; i++) {
+        var childNode = childNodes[i];
+        expect(childNode.parent).to.equal(null);
+      }
+    });
+  });
+
+  describe('#node.removeParent', function() {
+    it('should return null for parent property', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeWithParent = tree.getNodeById(3);
+
+      //Act
+      nodeWithParent.removeParent();
+
+      //Test
+      expect(nodeWithParent.parent).to.equal(null);
+    });
+
+    it('parent should not contain node in children array', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeWithParent = tree.getNodeById(3);
+      var parent = nodeWithParent.parent
+
+      //Act
+      nodeWithParent.removeParent();
+
+      //Test
+      parent.children.indexOf(nodeWithParent).should.equal(-1);
     });
   });
 });

@@ -159,6 +159,7 @@ buildTrees(objectArray, config);
     </tr>
   </tbody>
 </table>
+
 #### Methods
 
 ##### <b>addData</b>
@@ -540,6 +541,18 @@ Returns true if the current node is a leaf node
 
 ###### Usage
 isLeaf();
+
+##### <b>removeAllDescendants</b>
+Removes all descendants from the node
+
+###### Usage
+removeAllDescendants();
+
+##### <b>removeParent</b>
+Removes the parent and removes the node from the parents child array
+
+###### Usage
+removeParent();
 
 ## License
 (The MIT License)
