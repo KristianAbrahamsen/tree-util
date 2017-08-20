@@ -214,6 +214,45 @@ addData(objectArray, config);
   </tbody>
 </table>
 
+##### <b>createNode</b>
+Creates a node based on a data object. <br/>
+The data object must comply to the config when the tree was built. <br/>
+The new node must have an parent id which matches an id of a node in the tree.
+
+###### Usage
+createNode(dataObj);
+
+###### Arguments
+
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        dataObj
+      </td>
+      <td>
+        object
+      </td>
+      <td>
+        A data object similar to an object in the data array which was used to build the tree
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ##### <b>getNodeById</b>
 Gets the node in the tree based on id parameter.
 
@@ -366,6 +405,7 @@ addChild(child);
     </tr>    
   </tbody>
 </table>
+
 
 ##### <b>addParent</b>
 Sets the parent node for the node
@@ -547,6 +587,44 @@ Removes all descendants from the node
 
 ###### Usage
 removeAllDescendants();
+
+
+##### <b>removeChild</b>
+Removes the child node from the node
+
+###### Usage
+removeChild(child);
+
+###### Arguments
+
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        child
+      </td>
+      <td>
+        node
+      </td>
+      <td>
+         Child node
+      </td>
+    </tr>    
+  </tbody>
+</table>
 
 ##### <b>removeParent</b>
 Removes the parent and removes the node from the parents child array

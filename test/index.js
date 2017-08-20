@@ -53,6 +53,11 @@ describe('#tree_util.buildTrees', function() {
     tree_util.buildTrees(singleTreeTwoNodeObjArray, standardConfig).length.should.equal(1);
   });
 
+  it('config of tree should be the same as parameter config', function() {
+    var trees = tree_util.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
+    trees[0].config.should.deep.equal(standardConfig);
+  });
+
   it('aray with one root and one child node should return one tree where root has one child node', function() {
     var trees = tree_util.buildTrees(singleTreeTwoNodeObjArray, standardConfig);
     var rootNode = trees[0].rootNode;
@@ -646,4 +651,89 @@ describe('#node.isAncestorOf', function() {
       parent.children.indexOf(nodeWithParent).should.equal(-1);
     });
   });
+
+  describe('#tree.createNode', function() {
+    it('creates a node based on object data which complies with the tree config', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeDataObj = { id : 6, parentid : 2 };
+
+      //Act
+      var newNode = tree.createNode(nodeDataObj);
+
+      //Test
+      newNode.id.should.equal(nodeDataObj.id);
+    });
+
+    it('creates a node based and it will be a child of the expected parent node', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeDataObj = { id : 6, parentid : 2 };
+
+      //Act
+      var newNode = tree.createNode(nodeDataObj);
+
+      //Test
+      var parentNode = tree.getNodeById(newNode.parentid)
+      parentNode.children.indexOf(newNode).should.not.equal(-1);
+    });
+
+    it('tries creates a node based on object data where no parent can be found, throws error', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeDataObj = { id : 6, parentid : -1 };
+
+      //Act and Test
+      assert.throws(function() { tree.createNode(nodeDataObj); }, 'Could not find parent node. Does not belong to tree');
+    });
+  });
+
+  describe('#node.removeChild', function() {
+    it('removes a child node from a node', function() {
+      // An array where the items has a parent child reference using id properties
+      var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+                   { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      var standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      var trees = tree_util.buildTrees(items, standardConfig);
+      var tree = trees[0];
+      var nodeDataObj = { id : 6, parentid : 2 };
+      var newNode = tree.createNode(nodeDataObj);
+      var parentNode = tree.getNodeById(newNode.parentid)
+
+      //Act
+      parentNode.removeChild(newNode);
+
+      //Test
+      parentNode.children.indexOf(newNode).should.equal(-1);
+    });
+  });
+
 });

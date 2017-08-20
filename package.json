@@ -1,6 +1,6 @@
 {
   "name": "tree-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utility package for building a tree from array plus functions for wokring with trees",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,11 @@
     "builder",
     "node",
     "traverse",
-    "query"
+    "query",
+    "hierarchy",
+    "descendants",
+    "ancestors",
+    "data-structure"
   ],
   "author": "Kristian Marheim Abrahamsen <kristian.abrahamsen@gmail.com> (https://github.com/KristianAbrahamsen)",
   "license": "MIT",
