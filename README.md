@@ -7,7 +7,7 @@ Simple but powerfull library for building and working with tree structures.
   * Methods for determining ancestor and descendant relations between nodes
   * Methods for adding data to and getting data from tree structures
   * General methods for working with trees
-  * Heavily tested
+  * <b>Heavily tested</b>
 
 Easy to build tree structures where the data items has a parent child relation through id properties.
 An example of a data source with parent child relation can be a table in a relational database.
