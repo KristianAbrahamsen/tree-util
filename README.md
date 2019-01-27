@@ -42,7 +42,7 @@ var isDescendant = leafNode.isDescendantOf(rootNode); //returns true
 var isAncestor = rootNode.isAncestorOf(leafNode); //returns true
 ```
 
-Add data to the nodes based on reference id property
+Add data to the nodes based on reference id property and get data using a filter function
 
 ```js
 // Contiued from example above
@@ -57,6 +57,13 @@ tree.addData(itemDataArray, addDataConfig);
 
 var nodeWithCollection = tree.getNodeById(1);
 var nodeItems = nodeWithCollection.items; // returns an array with two objects
+
+var filterFunction = function(data) {
+    return (data && data.value && data.value > 1);
+}
+
+nodeWithCollection.getRecursiveNodeData(filterFunction); // returns an array with three objects
+
 ```
 
 And many more methods and properties for working with tree structures. See API reference below for more information.
@@ -491,16 +498,49 @@ getRecursiveCollection(collectionname);
 </table>
 
 ##### <b>getRecursiveNodeData</b>
-Gets the data added to the node and its descendants (added through method addData on the tree)
+Gets the data added to the node and its descendants (added through method addData on the tree). 
+The method takes an optional paramter, filterFunction, which can be used to filter the data result.
+
 
 ###### Usage
-getRecursiveNodeData();
+getRecursiveNodeData(filterFunction);
 
 ##### <b>getSingleNodeData</b>
 Gets the data added to the node (added through method addData on the tree)
 
 ###### Usage
 getSingleNodeData();
+
+###### Arguments
+
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Param</b>
+      </td>
+      <td>
+        <b>Type</b>
+      </td>
+      <td>
+        <b>Details</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        filterFunction
+      </td>
+      <td>
+        function
+      </td>
+      <td>
+         Optional. If set, it will only add the data to the result if the function evaluates to true for the given data item
+      </td>
+    </tr>    
+  </tbody>
+</table>
 
 ##### <b>isAncestorOf</b>
 Returns true if the current node is ancestor of the input parameter node

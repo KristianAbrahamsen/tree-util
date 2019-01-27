@@ -250,7 +250,7 @@ describe('#tree.getNodeById', function() {
   });
 });
 
-var itemArray = [{ itemid : 1, referenceid : 4 }, { itemid : 2, referenceid : 5 }, { itemid : 3, referenceid : 1 },  { itemid : 4, referenceid : 1 }];
+var itemArray = [{ itemid : 1, referenceid : 4, myStringProperty: 'abc' }, { itemid : 2, referenceid : 5, myStringProperty: 'abc' }, { itemid : 3, referenceid : 1, myStringProperty: 'abcd' },  { itemid : 4, referenceid : 1, myStringProperty: 'ab' }];
 var objectArray = [{ objectid : 1, refid : 1 }, { objectid : 2, refid : 5 }];
 var addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
 var addDataConfigObjectArray = { referenceid : 'refid', collectionname : 'objects' };
@@ -349,12 +349,54 @@ describe('#node.getSingleNodeData', function() {
 
 describe('#node.getRecursiveNodeData', function() {
   it('for the root node returns a collection with 6 items (they come from 4 different nodes)', function() {
-    let trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
-    var tree = trees[0];
+    const trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
+    const tree = trees[0];
     tree.addData(itemArray, addDataConfig);
     tree.addData(objectArray, addDataConfigObjectArray);
-    var node = tree.getNodeById(1);
+    const node = tree.getNodeById(1);
     node.getRecursiveNodeData().length.should.equal(6);
+  });
+
+  it('for the root node returns a collection with 2 items due to usage of filter function', function() {
+    const trees = tree_util.buildTrees(complexSingleTreeData, standardConfig);
+    const tree = trees[0];
+    tree.addData(itemArray, addDataConfig);
+    tree.addData(objectArray, addDataConfigObjectArray);
+
+    const filterFunction = function(data) {
+      return (data && data.myStringProperty && data.myStringProperty === 'abc');
+    }
+
+    const node = tree.getNodeById(1);
+    node.getRecursiveNodeData(filterFunction).length.should.equal(2);
+  });
+
+  it('for the root node returns a collection with 2 items due to usage of filter function', function() {
+    // An array where the items has a parent child reference using id properties
+    const items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+      { id : 4, parentid : 1 }, { id : 5, parentid : 3 }];
+
+    // Config object to set the id properties for the parent child relation
+    const standardConfig =  { id : 'id', parentid : 'parentid'};
+
+    // Creates an array of trees. For this example there will by only one tree
+    const trees = tree_util.buildTrees(items, standardConfig);
+
+    const tree = trees[0];
+    const itemDataArray = [{ itemid : 1, value : 2, referenceid : 4 },
+      { itemid : 2, value : 5, referenceid : 5 },
+      { itemid : 3, value : 3, referenceid : 1 },
+      { itemid : 4, value : 1, referenceid : 1 }];
+    const addDataConfig = { referenceid : 'referenceid', collectionname : 'items' };
+
+    tree.addData(itemDataArray, addDataConfig);
+
+    const filterFunction = function(data) {
+      return (data && data.value && data.value > 1);
+    }
+
+    const nodeWithCollection = tree.getNodeById(1);
+    nodeWithCollection.getRecursiveNodeData(filterFunction).length.should.equal(3);
   });
 
   it('for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data', function() {

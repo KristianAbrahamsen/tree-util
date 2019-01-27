@@ -1,73 +1,75 @@
 
 [0m[0m
 [0m  #tree_util.buildTrees[0m
-  [32m  √[0m[90m missing param objectArray should throw exception[0m
-  [32m  √[0m[90m missing param config should throw exception[0m
-  [32m  √[0m[90m config has not id property set, should throw exception[0m
-  [32m  √[0m[90m config has not parentid property set, should throw exception[0m
-  [32m  √[0m[90m empty input aray returns empty array of trees[0m
-  [32m  √[0m[90m aray with one object should return an array containing one tree[0m
-  [32m  √[0m[90m aray with one root and one child node should return an array containing one tree[0m
-  [32m  √[0m[90m config of tree should be the same as parameter config[0m
-  [32m  √[0m[90m aray with one root and one child node should return one tree where root has one child node[0m
-  [32m  √[0m[90m aray with one root and one child node should return one tree where single child node has root as parent[0m
-  [32m  √[0m[90m aray with one root which has tree child nodee should return one tree where root has tree children[0m
-  [32m  √[0m[90m aray with one root which has tree child nodee should return one tree where each child as root as parent[0m
-  [32m  √[0m[90m aray with one root which has more complex structure should have the property parent set correct for all nodes[0m
-  [32m  √[0m[90m aray with one root which has more complex structure should have child count for each node as expected[0m
-  [32m  √[0m[90m aray with two root which has more complex structure should have child count for each node as expected[0m
+  [32m  ✓[0m[90m missing param objectArray should throw exception[0m
+  [32m  ✓[0m[90m missing param config should throw exception[0m
+  [32m  ✓[0m[90m config has not id property set, should throw exception[0m
+  [32m  ✓[0m[90m config has not parentid property set, should throw exception[0m
+  [32m  ✓[0m[90m empty input aray returns empty array of trees[0m
+  [32m  ✓[0m[90m aray with one object should return an array containing one tree[0m
+  [32m  ✓[0m[90m aray with one root and one child node should return an array containing one tree[0m
+  [32m  ✓[0m[90m config of tree should be the same as parameter config[0m
+  [32m  ✓[0m[90m aray with one root and one child node should return one tree where root has one child node[0m
+  [32m  ✓[0m[90m aray with one root and one child node should return one tree where single child node has root as parent[0m
+  [32m  ✓[0m[90m aray with one root which has tree child nodee should return one tree where root has tree children[0m
+  [32m  ✓[0m[90m aray with one root which has tree child nodee should return one tree where each child as root as parent[0m
+  [32m  ✓[0m[90m aray with one root which has more complex structure should have the property parent set correct for all nodes[0m
+  [32m  ✓[0m[90m aray with one root which has more complex structure should have child count for each node as expected[0m
+  [32m  ✓[0m[90m aray with two root which has more complex structure should have child count for each node as expected[0m
 
 [0m  #tree.getNodeById[0m
-  [32m  √[0m[90m will return an item with the expected id[0m
+  [32m  ✓[0m[90m will return an item with the expected id[0m
 
 [0m  #tree.addData[0m
-  [32m  √[0m[90m addData is called with mising objectArray param and exception is thrown[0m
-  [32m  √[0m[90m addData is called with mising config param and exception is thrown[0m
-  [32m  √[0m[90m addData is called and data is added to the right nodes[0m
-  [32m  √[0m[90m addData is called with the same data as in the example in the readme file[0m
+  [32m  ✓[0m[90m addData is called with mising objectArray param and exception is thrown[0m
+  [32m  ✓[0m[90m addData is called with mising config param and exception is thrown[0m
+  [32m  ✓[0m[90m addData is called and data is added to the right nodes[0m
+  [32m  ✓[0m[90m addData is called with the same data as in the example in the readme file[0m
 
 [0m  #node.getSingleNodeData[0m
-  [32m  √[0m[90m for the given node returns a collection with 2 items (they come from same collection)[0m
-  [32m  √[0m[90m for given node returns a collection with 3 items (they come from two collections)[0m
+  [32m  ✓[0m[90m for the given node returns a collection with 2 items (they come from same collection)[0m
+  [32m  ✓[0m[90m for given node returns a collection with 3 items (they come from two collections)[0m
 
 [0m  #node.getRecursiveNodeData[0m
-  [32m  √[0m[90m for the root node returns a collection with 6 items (they come from 4 different nodes)[0m
-  [32m  √[0m[90m for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data[0m
+  [32m  ✓[0m[90m for the root node returns a collection with 6 items (they come from 4 different nodes)[0m
+  [32m  ✓[0m[90m for the root node returns a collection with 2 items due to usage of filter function[0m
+  [32m  ✓[0m[90m for the root node returns a collection with 2 items due to usage of filter function[0m
+  [32m  ✓[0m[90m for each leaf node in the tree getSingleNodeData and getRecursiveNodeData should return same data[0m
 
 [0m  #node.getRecursiveCollection[0m
-  [32m  √[0m[90m for the root node returns the same data as input for tree.addData)[0m
-  [32m  √[0m[90m for the root node returns the same data as input for tree.addData (with different data then previous))[0m
+  [32m  ✓[0m[90m for the root node returns the same data as input for tree.addData)[0m
+  [32m  ✓[0m[90m for the root node returns the same data as input for tree.addData (with different data then previous))[0m
 
 [0m  #node.getDescendants[0m
-  [32m  √[0m[90m for the root node returns an array where length is equal to items count - 1 (the root)[0m
+  [32m  ✓[0m[90m for the root node returns an array where length is equal to items count - 1 (the root)[0m
 
 [0m  #node.getAncestors[0m
-  [32m  √[0m[90m for all descendant nodes of the root node will have the root among its ancestors[0m
+  [32m  ✓[0m[90m for all descendant nodes of the root node will have the root among its ancestors[0m
 
 [0m  #node.isDescendantOf[0m
-  [32m  √[0m[90m all root descendants should return true when they call isDescendantOf with root node as param[0m
-  [32m  √[0m[90m example from readme file[0m
+  [32m  ✓[0m[90m all root descendants should return true when they call isDescendantOf with root node as param[0m
+  [32m  ✓[0m[90m example from readme file[0m
 
 [0m  #node.isAncestorOf[0m
-  [32m  √[0m[90m all root descendants should return true when they are used as input param for method isAncestorOf on root node[0m
-  [32m  √[0m[90m example from readme file[0m
+  [32m  ✓[0m[90m all root descendants should return true when they are used as input param for method isAncestorOf on root node[0m
+  [32m  ✓[0m[90m example from readme file[0m
 [0m    #node.isLeaf[0m
-    [32m  √[0m[90m should return true when node is a leaf node[0m
-    [32m  √[0m[90m should return true when node is not a leaf node[0m
+    [32m  ✓[0m[90m should return true when node is a leaf node[0m
+    [32m  ✓[0m[90m should return true when node is not a leaf node[0m
 [0m    #node.removeAllDescendants[0m
-    [32m  √[0m[90m should return 0 for length for children property after function call on node with child nodes[0m
-    [32m  √[0m[90m should return 0 for length for children property after function call on node with no child nodes[0m
-    [32m  √[0m[90m all child nodes should have parent set to null after function call[0m
+    [32m  ✓[0m[90m should return 0 for length for children property after function call on node with child nodes[0m
+    [32m  ✓[0m[90m should return 0 for length for children property after function call on node with no child nodes[0m
+    [32m  ✓[0m[90m all child nodes should have parent set to null after function call[0m
 [0m    #node.removeParent[0m
-    [32m  √[0m[90m should return null for parent property[0m
-    [32m  √[0m[90m parent should not contain node in children array[0m
+    [32m  ✓[0m[90m should return null for parent property[0m
+    [32m  ✓[0m[90m parent should not contain node in children array[0m
 [0m    #tree.createNode[0m
-    [32m  √[0m[90m creates a node based on object data which complies with the tree config[0m
-    [32m  √[0m[90m creates a node based and it will be a child of the expected parent node[0m
-    [32m  √[0m[90m tries creates a node based on object data where no parent can be found, throws error[0m
+    [32m  ✓[0m[90m creates a node based on object data which complies with the tree config[0m
+    [32m  ✓[0m[90m creates a node based and it will be a child of the expected parent node[0m
+    [32m  ✓[0m[90m tries creates a node based on object data where no parent can be found, throws error[0m
 [0m    #node.removeChild[0m
-    [32m  √[0m[90m removes a child node from a node[0m
+    [32m  ✓[0m[90m removes a child node from a node[0m
 
 
-[92m [0m[32m 43 passing[0m[90m (186ms)[0m
+[92m [0m[32m 45 passing[0m[90m (49ms)[0m
 
