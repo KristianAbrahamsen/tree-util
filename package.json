@@ -1,7 +1,7 @@
 {
   "name": "tree-util",
-  "version": "1.0.4",
-  "description": "Utility package for building a tree from array plus functions for wokring with trees",
+  "version": "1.0.5",
+  "description": "Utility package for building a tree from array plus functions for working with trees",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
