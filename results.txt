@@ -72,5 +72,5 @@
     [32m  ✓[0m[90m removes a child node from a node[0m
 
 
-[92m [0m[32m 46 passing[0m[90m (15ms)[0m
+[92m [0m[32m 46 passing[0m[90m (17ms)[0m
 
