@@ -33,6 +33,6 @@
     "grunt": "^1.0.1",
     "grunt-mocha": "^1.0.2",
     "grunt-mocha-test": "^0.13.2",
-    "mocha": "^5.2.0"
+    "mocha": "^8.3.2"
   }
 }

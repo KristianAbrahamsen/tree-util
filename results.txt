@@ -65,11 +65,12 @@
     [32m  ✓[0m[90m parent should not contain node in children array[0m
 [0m    #tree.createNode[0m
     [32m  ✓[0m[90m creates a node based on object data which complies with the tree config[0m
+    [32m  ✓[0m[90m creates a node which can be found by getNodeById[0m
     [32m  ✓[0m[90m creates a node based and it will be a child of the expected parent node[0m
     [32m  ✓[0m[90m tries creates a node based on object data where no parent can be found, throws error[0m
 [0m    #node.removeChild[0m
     [32m  ✓[0m[90m removes a child node from a node[0m
 
 
-[92m [0m[32m 45 passing[0m[90m (49ms)[0m
+[92m [0m[32m 46 passing[0m[90m (15ms)[0m
 

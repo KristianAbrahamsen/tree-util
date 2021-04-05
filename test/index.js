@@ -715,6 +715,30 @@ describe('#node.isAncestorOf', function() {
       newNode.id.should.equal(nodeDataObj.id);
     });
 
+    it('creates a node which can be found by getNodeById', function() {
+      // An array where the items has a parent child reference using id properties
+      const items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
+        { id : 4, parentid : 3 }, { id : 5, parentid : 3 }];
+
+      // Config object to set the id properties for the parent child relation
+      const standardConfig =  { id : 'id', parentid : 'parentid'};
+
+      // Creates an array of trees. For this example there will by only one tree
+      const trees = tree_util.buildTrees(items, standardConfig);
+      const tree = trees[0];
+      const nodeDataObj = { id : 6, parentid : 2 };
+
+      //Act
+      const newNode = tree.createNode(nodeDataObj);
+
+      //Test
+      const nodeInTree = tree.getNodeById(newNode.id);
+
+      expect(!!nodeInTree).to.equal(true);
+      expect(nodeInTree.id).to.equal(newNode.id);
+      expect(nodeInTree.parentid).to.equal(newNode.parentid);
+    });
+
     it('creates a node based and it will be a child of the expected parent node', function() {
       // An array where the items has a parent child reference using id properties
       var items = [{ id : 1 }, { id : 2, parentid : 1 }, { id : 3, parentid : 1 },
